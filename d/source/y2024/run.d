@@ -8,6 +8,10 @@ void run(string inputFile, int day)
             import y2024.day1;
             y2024.day1.both(inputFile);
             break;
+        case 2:
+            import y2024.day2;
+            y2024.day2.both(inputFile);
+            break;
         default:
             import std.stdio;
             writeln("Day ", day, " not implemented yet.");
