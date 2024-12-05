@@ -1,0 +1,16 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/adventofcode
+adventofcode.so
+adventofcode.dylib
+adventofcode.dll
+adventofcode.a
+adventofcode.lib
+adventofcode-test-*
+*.exe
+*.pdb
+*.o
+*.obj
+*.lst

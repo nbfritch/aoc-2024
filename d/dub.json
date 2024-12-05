@@ -1,0 +1,9 @@
+{
+	"authors": [
+		"Nathan Fritch"
+	],
+	"copyright": "Copyright © 2024, Nathan Fritch",
+	"description": "Solutions to the 2024 advent of code in D",
+	"license": "MIT",
+	"name": "adventofcode"
+}
