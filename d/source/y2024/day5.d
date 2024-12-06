@@ -15,14 +15,17 @@ int part1(string inputFile)
     auto rules = parts[0].split("\n").filter!(a => a.length > 0).map!(a => a.split("|").map!(b => b.to!int));
     auto updates = parts[1].split("\n").filter!(a => a.length > 0).map!(a => a.split(",").map!(b => b.to!int));
     return updates
-    .filter!(update =>
-        rules.all!(rule =>
-            update.countUntil!(u => u == rule[0]) == -1 ||
-            update.countUntil!(u => u == rule[1]) == -1 ||
-            update.countUntil!(u => u == rule[0]) < update.countUntil!(u => u == rule[1])))
-    .map!(update => update[update.length / 2])
-    .array
-    .sum;
+        .filter!(update =>
+            rules
+                .filter!(rule =>
+                    update.canFind!(u => u == rule[0]) &&
+                    update.canFind!(u => u == rule[1]))
+                .all!(rule =>
+                    update.countUntil!(u => u == rule[0]) < update.countUntil!(u => u == rule[1])
+                ))
+        .map!(update => update[update.length / 2])
+        .array
+        .sum;
 }
 
 int part2(string inputFile)
