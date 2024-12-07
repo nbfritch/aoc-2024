@@ -48,5 +48,15 @@
       "part1": 143,
       "part2": 123
     }
+  },
+  "day6": {
+    "day6": {
+      "part1": 5212,
+      "part2": null
+    },
+    "day6_test1": {
+      "part1": 41,
+      "part2": 6
+    }
   }
 }
