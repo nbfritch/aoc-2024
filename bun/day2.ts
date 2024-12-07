@@ -1,24 +1,18 @@
-import { readFile } from "fs/promises";
-import { argv } from "process";
+import { readFile } from 'fs/promises';
+import { argv } from 'process';
 
 const inputFile = argv[2];
 
 const part1 = (lines: Array<string>): number => {
-  const reports = lines.map((line) =>
-    line.split(" ").map((value) => parseInt(value)),
-  );
+  const reports = lines.map((line) => line.split(' ').map((value) => parseInt(value)));
   let validReports = 0;
-  for (let i = 0; i < reports.length; i++) {
-    const report = reports[i];
+  for (const report of reports) {
     let diffs = [];
     for (let j = 0; j < report.length - 1; j++) {
       diffs.push(report[j] - report[j + 1]);
     }
 
-    if (
-      diffs.every((diff) => [-3, -2, -1].includes(diff)) ||
-      diffs.every((diff) => [1, 2, 3].includes(diff))
-    ) {
+    if (diffs.every((diff) => diff >= -3 && diff <= -1) || diffs.every((diff) => diff >= 1 && diff <= 3)) {
       validReports++;
     }
   }
@@ -34,10 +28,7 @@ const validIfOneRemoved = (report: Array<number>): boolean => {
     for (let j = 0; j < copy.length - 1; j++) {
       diffs.push(copy[j] - copy[j + 1]);
     }
-    if (
-      diffs.every((diff) => [-3, -2, -1].includes(diff)) ||
-      diffs.every((diff) => [1, 2, 3].includes(diff))
-    ) {
+    if (diffs.every((diff) => [-3, -2, -1].includes(diff)) || diffs.every((diff) => [1, 2, 3].includes(diff))) {
       return true;
     }
   }
@@ -45,20 +36,14 @@ const validIfOneRemoved = (report: Array<number>): boolean => {
 };
 
 const part2 = (lines: Array<string>): number => {
-  const reports = lines.map((line) =>
-    line.split(" ").map((value) => parseInt(value)),
-  );
+  const reports = lines.map((line) => line.split(' ').map((value) => parseInt(value)));
   let validReports = 0;
-  for (let i = 0; i < reports.length; i++) {
-    const report = reports[i];
+  for (const report of reports) {
     let diffs = [];
     for (let j = 0; j < report.length - 1; j++) {
       diffs.push(report[j] - report[j + 1]);
     }
-    if (
-      diffs.every((diff) => [-3, -2, -1].includes(diff)) ||
-      diffs.every((diff) => [1, 2, 3].includes(diff))
-    ) {
+    if (diffs.every((diff) => [-3, -2, -1].includes(diff)) || diffs.every((diff) => [1, 2, 3].includes(diff))) {
       validReports++;
     } else {
       if (validIfOneRemoved(report)) {
@@ -71,8 +56,8 @@ const part2 = (lines: Array<string>): number => {
 };
 
 const puzzle = (await readFile(inputFile))
-  .toString("utf-8")
-  .split("\n")
+  .toString('utf-8')
+  .split('\n')
   .filter((x) => x.length > 0);
 console.log(`Day 2, Part 1: ${part1(puzzle)}`);
 console.log(`Day 2, Part 2: ${part2(puzzle)}`);

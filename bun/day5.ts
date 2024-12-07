@@ -1,19 +1,17 @@
-import { readFile } from "fs/promises";
-import { argv } from "process";
+import { readFile } from 'fs/promises';
+import { argv } from 'process';
 
 const inputFile = argv[2];
 
 const part1 = (rulesStr: string, updateStr: string): number => {
   const rules: Array<Array<number>> = rulesStr
-    .split("\n")
+    .split('\n')
     .filter((n) => n.length > 0)
-    .map((rule) => rule.split("|").map((rulePart) => parseInt(rulePart, 10)));
+    .map((rule) => rule.split('|').map((rulePart) => parseInt(rulePart, 10)));
   const updates = updateStr
-    .split("\n")
+    .split('\n')
     .filter((n) => n.length > 0)
-    .map((update) =>
-      update.split(",").map((updatePart) => parseInt(updatePart, 10)),
-    );
+    .map((update) => update.split(',').map((updatePart) => parseInt(updatePart, 10)));
   let sum = 0;
   for (const u of updates) {
     let brokenRule = false;
@@ -40,26 +38,19 @@ const part1 = (rulesStr: string, updateStr: string): number => {
 
 const part2 = (rulesStr: string, updateStr: string): number => {
   const rules: Array<Array<number>> = rulesStr
-    .split("\n")
+    .split('\n')
     .filter((n) => n.length > 0)
-    .map((rule) => rule.split("|").map((rulePart) => parseInt(rulePart, 10)));
+    .map((rule) => rule.split('|').map((rulePart) => parseInt(rulePart, 10)));
   const updates = updateStr
-    .split("\n")
+    .split('\n')
     .filter((n) => n.length > 0)
-    .map((update) =>
-      update.split(",").map((updatePart) => parseInt(updatePart, 10)),
-    );
+    .map((update) => update.split(',').map((updatePart) => parseInt(updatePart, 10)));
   let sum = 0;
 
   for (const u of updates) {
-    const applicibleRules = rules.filter(
-      ([before, after]) => u.includes(before) && u.includes(after),
-    );
+    const applicibleRules = rules.filter(([before, after]) => u.includes(before) && u.includes(after));
     const sortedU = [...u].sort((v1, v2) => {
-      const rule = applicibleRules.find(
-        (rule) =>
-          (rule[0] == v1 && rule[1] == v2) || (rule[0] == v2 && rule[1] == v1),
-      );
+      const rule = applicibleRules.find((rule) => (rule[0] == v1 && rule[1] == v2) || (rule[0] == v2 && rule[1] == v1));
       if (rule == null) {
         return 0;
       }
@@ -78,8 +69,8 @@ const part2 = (rulesStr: string, updateStr: string): number => {
 };
 
 const [rules, updates] = (await readFile(inputFile))
-  .toString("utf-8")
-  .split("\n\n")
+  .toString('utf-8')
+  .split('\n\n')
   .filter((x) => x.length > 0);
 console.log(`Day 1, Part 1: ${part1(rules, updates)}`);
 console.log(`Day 1, Part 2: ${part2(rules, updates)}`);

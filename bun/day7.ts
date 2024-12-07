@@ -1,5 +1,5 @@
-import { readFile } from "fs/promises";
-import { argv } from "process";
+import { readFile } from 'fs/promises';
+import { argv } from 'process';
 
 const inputFile = argv[2];
 
@@ -8,11 +8,7 @@ interface Reading {
   values: Array<number>;
 }
 
-const anyCombination = (
-  target: number,
-  value: number,
-  otherValues: Array<number>,
-): boolean => {
+const anyCombination = (target: number, value: number, otherValues: Array<number>): boolean => {
   if (otherValues.length === 0) {
     return target == value;
   }
@@ -30,11 +26,7 @@ const anyCombination = (
 };
 
 const part1 = (lines: Array<string>): number => {
-  const anyCombination = (
-    target: number,
-    value: number,
-    otherValues: Array<number>,
-  ): boolean => {
+  const anyCombination = (target: number, value: number, otherValues: Array<number>): boolean => {
     if (otherValues.length === 0) {
       return target == value;
     }
@@ -53,11 +45,11 @@ const part1 = (lines: Array<string>): number => {
   };
 
   const readings: Array<Reading> = lines.map((line) => {
-    const [targetStr, valuesStr] = line.split(": ");
+    const [targetStr, valuesStr] = line.split(': ');
 
     return {
       target: parseInt(targetStr, 10),
-      values: valuesStr.split(" ").map((p) => parseInt(p, 10)),
+      values: valuesStr.split(' ').map((p) => parseInt(p, 10)),
     };
   });
 
@@ -71,11 +63,7 @@ const concatenate = (n1: number, n2: number): number => {
 };
 
 const part2 = (lines: Array<string>): number => {
-  const anyCombination = (
-    target: number,
-    value: number,
-    otherValues: Array<number>,
-  ): boolean => {
+  const anyCombination = (target: number, value: number, otherValues: Array<number>): boolean => {
     if (otherValues.length === 0) {
       return target == value;
     }
@@ -97,10 +85,10 @@ const part2 = (lines: Array<string>): number => {
   };
 
   const readings: Array<Reading> = lines.map((line) => {
-    const [targetStr, valuesStr] = line.split(": ");
+    const [targetStr, valuesStr] = line.split(': ');
     return {
       target: parseInt(targetStr, 10),
-      values: valuesStr.split(" ").map((p) => parseInt(p, 10)),
+      values: valuesStr.split(' ').map((p) => parseInt(p, 10)),
     };
   });
 
@@ -110,8 +98,8 @@ const part2 = (lines: Array<string>): number => {
 };
 
 const puzzle = (await readFile(inputFile))
-  .toString("utf-8")
-  .split("\n")
+  .toString('utf-8')
+  .split('\n')
   .filter((x) => x.length > 0);
 console.log(`Day 7, Part 1: ${part1(puzzle)}`);
 console.log(`Day 7, Part 2: ${part2(puzzle)}`);

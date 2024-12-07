@@ -1,5 +1,5 @@
-import { readFile } from "fs/promises";
-import { argv } from "process";
+import { readFile } from 'fs/promises';
+import { argv } from 'process';
 
 const inputFile = argv[2];
 
@@ -15,24 +15,25 @@ const turnRight = (p: Pos): Pos => {
   };
 };
 
-const part1 = (lines: Array<string>): number => {
+const findStart = (lines: Array<string>): Pos => {
   let start: { x: number; y: number } | null = null;
   for (let y = 0; y < lines.length; y++) {
     for (let x = 0; x < lines[y].length; x++) {
-      if (lines[y][x] === "^") {
+      if (lines[y][x] === '^') {
         start = { x, y };
         break;
       }
     }
   }
 
-  if (start == null) {
-    throw new Error("Must contain char ^");
-  }
+  if (start == null) throw new Error('Could not find start');
+  return start;
+};
 
-  const guardedPositions: Array<Array<boolean>> = lines.map((line) =>
-    Array.from(line).map((_) => false),
-  );
+const part1 = (lines: Array<string>): number => {
+  const start = findStart(lines);
+
+  const guardedPositions: Array<Array<boolean>> = lines.map((line) => Array.from(line).map((_) => false));
 
   let currentPos: Pos = { ...start };
   let currentDirection: Pos = { x: 0, y: -1 };
@@ -61,7 +62,7 @@ const part1 = (lines: Array<string>): number => {
     ) {
       break;
     }
-    if (lines[thingInFront.y][thingInFront.x] == "#") {
+    if (lines[thingInFront.y][thingInFront.x] == '#') {
       currentDirection = turnRight(currentDirection);
     }
 
@@ -87,8 +88,8 @@ const part2 = (lines: Array<string>): number => {
 };
 
 const puzzle = (await readFile(inputFile))
-  .toString("utf-8")
-  .split("\n")
+  .toString('utf-8')
+  .split('\n')
   .filter((x) => x.length > 0);
 console.log(`Day 6, Part 1: ${part1(puzzle)}`);
 console.log(`Day 6, Part 2: ${part2(puzzle)}`);
